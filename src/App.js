@@ -8,6 +8,9 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Instamart from "./components/Instamart";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 
 
@@ -18,11 +21,11 @@ import Instamart from "./components/Instamart";
 
 const AppLayout = () => {
     return (
-        <>
-        <HeaderComponent />
-        <Outlet/>
-        <Footer />
-        </>
+        <Provider store={store}>
+            <HeaderComponent />
+            <Outlet/>
+            <Footer />
+        </Provider>
 
     );
 
@@ -55,6 +58,10 @@ const appRouter = createBrowserRouter([
             {
                 path:"/Instamart",
                 element:<Instamart/>
+            },
+            {
+                path:"/Cart",
+                element:<Cart/>
             }
             
 

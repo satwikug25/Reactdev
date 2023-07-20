@@ -4,6 +4,8 @@ import { useState,useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
+import { addItem } from "../utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 
 
@@ -43,6 +45,12 @@ const Body = () => {
 
     if(!allRestaurants) return null;
 
+
+    const dispatch = useDispatch();
+    handleAddItem=(restaurant)=>{
+        dispatch(addItem(restaurant));
+    }
+
     
 
 
@@ -71,7 +79,16 @@ const Body = () => {
         </div>
         <div className="flex flex-wrap justify-between  ">
              {restaurants.map((restaurant)=>{
-                return <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+                return (
+                <div>
+                
+                <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+                <button className="flex justify-center p-2 font-bold text-lg bg-blue-50 hover:bg-black hover:text-white  border border-gray-950 rounded-full" 
+                onClick={()=>handleAddItem(restaurant) }> Add to Cart </button>
+                {console.log()}
+                
+                </div>
+                )
             }
             )
             }
